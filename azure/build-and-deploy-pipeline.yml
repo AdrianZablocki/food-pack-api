@@ -62,7 +62,7 @@ stages:
             deploy:
               steps:
                 - task: AzureWebApp@1
-                  displayName: 'Azure Web App Deploy: god-food-auth'
+                  displayName: 'Azure Web App Deploy: food-pack-api'
                   inputs:
                     azureSubscription: $(azureSubscription)
                     appType: webAppLinux
