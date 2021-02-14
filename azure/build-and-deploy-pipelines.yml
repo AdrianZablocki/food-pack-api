@@ -4,13 +4,8 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-  batch: true
-  branches:
-    include:
-      - master
-  paths:
-    exclude:
-      - README.md
+- master
+pr: none
 
 stages:
 - stage: Build
