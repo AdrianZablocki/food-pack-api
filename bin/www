@@ -1,6 +1,29 @@
 #!/usr/bin/env node
 
 /**
+ * Set dotenv config.
+ */
+
+require('dotenv').config({ path: '.env' });
+
+/**
+ * Connect with data base on mongoDB.
+ */
+
+const mongoose  = require('mongoose');
+require('../models/user-model');
+
+mongoose.connect(process.env.DATABASE, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true
+});
+
+mongoose.Promise = global.Promise;
+mongoose.connection.on('error', function(err) {
+  console.log('Database Connection Error -> ' + err.message);
+});
+
+/**
  * Module dependencies.
  */
 
