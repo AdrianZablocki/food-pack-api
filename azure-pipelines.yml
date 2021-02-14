@@ -10,10 +10,10 @@ variables:
 
   # Azure Resource Manager connection created during pipeline creation
   azureSubscription: 'c1e9c3fa-aa95-4819-9142-0692c61978db'
-  
+
   # Web app name
   webAppName: 'food-pack-api'
-  
+
   # Environment name
   environmentName: 'food-pack-api'
 
@@ -23,12 +23,12 @@ variables:
 stages:
 - stage: Build
   displayName: Build stage
-  jobs:  
+  jobs:
   - job: Build
     displayName: Build
     pool:
       vmImage: $(vmImageName)
-      
+
     steps:
     - task: NodeTool@0
       inputs:
@@ -40,7 +40,9 @@ stages:
         npm run build --if-present
         npm run test --if-present
       displayName: 'npm install, build and test'
-      
+      env:
+        DATABASE: $(DATABASE)
+
     - task: ArchiveFiles@2
       displayName: 'Archive files'
       inputs:
@@ -61,12 +63,12 @@ stages:
   - deployment: Deploy
     displayName: Deploy
     environment: $(environmentName)
-    pool: 
+    pool:
       vmImage: $(vmImageName)
     strategy:
       runOnce:
         deploy:
-          steps:            
+          steps:
           - task: AzureWebApp@1
             displayName: 'Azure Web App Deploy: food-pack-api'
             inputs:
