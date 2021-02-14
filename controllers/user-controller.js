@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const User = mongoose.model('user');
 const saltRounds = 12
 
-exports.createUser = (req, res) => {
+exports.createUser = function(req, res) {
   User.findOne({ email: req.body.email }).then(user => {
     if (!user) {
       bcrypt.hash(req.body.password, saltRounds, (err,   hash) => {
