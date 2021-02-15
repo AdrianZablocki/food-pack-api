@@ -2,10 +2,11 @@
 const mongoose = require('mongoose');
 // const bcrypt = require('bcrypt');
 
-const User = mongoose.model('user');
+const User = mongoose.model('users');
 // const saltRounds = 12
 
-exports.createUser = function(req, res) {
+exports.createUser = async function(req, res) {
+  const user = await User.findOne({ email: req.body.email })
   res.status(200).json({ message: 'Crete user' })
  // User.findOne({ email: req.body.email })
  //  .then(user => {
