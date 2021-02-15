@@ -13,22 +13,22 @@ exports.createUser = async function(req, res) {
   //       message: `User with email: ${req.body.email} exist`
   //     });
   //   }
-
-  try {
-    const user = await User.findOne({ email: req.body.email })
-    if (!user) {
-      res.status(200).json({ message: 'User created' })
-    } else {
-      res.status(409).json({
-        message: `User with email: ${req.body.email} exist`
-      });
-    }
-
-  } catch {
-    return res.status(400).json({
-      message: 'Kurwa mać jego mać'
-    });
-  }
+  res.status(200).json({ message: 'No co ty kurwa, chujnia z tą bazą nie działa' })
+  // try {
+  //   const user = await User.findOne({ email: req.body.email })
+  //   if (!user) {
+  //     res.status(200).json({ message: 'User created' })
+  //   } else {
+  //     res.status(409).json({
+  //       message: `User with email: ${req.body.email} exist`
+  //     });
+  //   }
+  //
+  // } catch {
+  //   return res.status(400).json({
+  //     message: 'Kurwa mać jego mać'
+  //   });
+  // }
 
   // res.json({ message: 'Huj w to wbijam' });
   // User.findOne({ email: req.body.email }).then(function(user) {
