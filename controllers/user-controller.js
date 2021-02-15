@@ -1,9 +1,9 @@
 // const asyncHandler = require('express-async-handler')
 // const mongoose = require('mongoose');
-// const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 
 // const User = mongoose.model('users');
-// const saltRounds = 12
+const saltRounds = 12
 
 const MongoClient = require('mongodb').MongoClient
 
