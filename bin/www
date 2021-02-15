@@ -16,10 +16,11 @@ require('../models/user-model');
 mongoose.connect(process.env.DATABASE, {
   useUnifiedTopology: true,
   useNewUrlParser: true
-});
+}).then(client => console.log('Connected to Database'))
+  .catch(error => console.error(error));
 
 mongoose.Promise = global.Promise;
-mongoose.connection.on('error', function(err) {
+mongoose.connection.on('error', (err) => {
   console.log('Database Connection Error -> ' + err.message);
 });
 
