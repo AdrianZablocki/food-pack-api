@@ -1,9 +1,9 @@
-const asyncHandler = require('express-async-handler')
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+// const asyncHandler = require('express-async-handler')
+// const mongoose = require('mongoose');
+// const bcrypt = require('bcrypt');
 
-const User = mongoose.model('user');
-const saltRounds = 12
+// const User = mongoose.model('user');
+// const saltRounds = 12
 
 exports.createUser = function(req, res) {
   // const user = await User.findOne({ email: req.body.email })
