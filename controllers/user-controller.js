@@ -5,8 +5,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('user');
 // const saltRounds = 12
 
-exports.createUser = async function(req, res) {
-  const user = await User.findOne({ email: req.body.email })
+exports.createUser = function(req, res) {
   res.status(200).json({ message: 'Crete user' })
  // User.findOne({ email: req.body.email })
  //  .then(user => {
