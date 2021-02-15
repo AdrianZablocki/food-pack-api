@@ -9,18 +9,18 @@ require('dotenv').config({ path: '.env' });
 /**
  * Connect with data base on mongoDB.
  */
-const mongoose  = require('mongoose');
-require('../models/user-model');
+// const mongoose  = require('mongoose');
+// require('../models/user-model');
 
-mongoose.connect(process.env.DATABASE, {
-  useUnifiedTopology: true,
-  useNewUrlParser: true
-}).then(() => console.log('Connected to Database'));
+// mongoose.connect(process.env.DATABASE, {
+//   useUnifiedTopology: true,
+//   useNewUrlParser: true
+// }).then(() => console.log('Connected to Database'));
 
-mongoose.Promise = global.Promise;
-mongoose.connection.on('error', (err) => {
-  console.log('Database Connection Error -> ' + err.message);
-});
+// mongoose.Promise = global.Promise;
+// mongoose.connection.on('error', (err) => {
+//   console.log('Database Connection Error -> ' + err.message);
+// });
 
 /**
  * Module dependencies.
