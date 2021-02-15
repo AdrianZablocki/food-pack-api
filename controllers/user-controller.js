@@ -25,7 +25,9 @@ exports.createUser = async function(req, res) {
     }
 
   } catch {
-    return res.sendStatus(404) // bad request
+    return res.status(400).json({
+      message: 'Kurwa mać'
+    });
   }
 
   // res.json({ message: 'Huj w to wbijam' });
