@@ -1,19 +1,20 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 
 const User = mongoose.model('user');
-const saltRounds = 12
+// const saltRounds = 12
 
 exports.createUser = function(req, res) {
-  User.findOne({ email: req.body.email }).then(function(user) {
-    if (!user) {
-      res.status(200).json({ message: 'User created' })
-    } else {
-      res.status(409).json({
-        message: `User with email: ${req.body.email} exist`
-      });
-    }
-  });
+  res.json({ message: 'Huj w to wbijam' })
+  // User.findOne({ email: req.body.email }).then(function(user) {
+  //   if (!user) {
+  //     res.status(200).json({ message: 'User created' })
+  //   } else {
+  //     res.status(409).json({
+  //       message: `User with email: ${req.body.email} exist`
+  //     });
+  //   }
+  // });
 }
 
 // exports.createUser = async (req, res) => {
