@@ -9,6 +9,9 @@ const indexRouter = require('./routes/index');
 // const authRouter = require('./routes/auth-routes');
 const userRouter = require('./routes/user-routes');
 
+
+require('dotenv').config({ path: '.env' });
+
 const app = express();
 
 // view engine setup
