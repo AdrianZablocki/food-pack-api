@@ -31,7 +31,7 @@ const saltRounds = 12
 // }
 
 
-exports.createUser = asyncHandler(async (req, res) => {
+exports.createUser = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
 
   if (!user) {
@@ -56,4 +56,4 @@ exports.createUser = asyncHandler(async (req, res) => {
       message: `User with email: ${req.body.email} exist`
     });
   }
-})
+}
