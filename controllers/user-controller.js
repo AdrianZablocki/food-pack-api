@@ -7,22 +7,7 @@ const saltRounds = 12
 exports.createUser = function(req, res) {
   User.findOne({ email: req.body.email }).then(function(user) {
     if (!user) {
-      bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
-        new User({
-          email: req.body.email,
-          password: hash
-        }).save(function(err, data) {
-          if (err) {
-            res.status(500).json({
-              message: 'Something went wrong, try again later'
-            });
-          } else {
-            const userData = { ...data._doc }
-            delete userData.password
-            res.status(200).json({ message: 'User created', userData })
-          }
-        })
-      });
+      res.status(200).json({ message: 'User created' })
     } else {
       res.status(409).json({
         message: `User with email: ${req.body.email} exist`
