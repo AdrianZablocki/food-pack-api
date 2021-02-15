@@ -13,7 +13,13 @@ exports.createUser = function(req, res) {
   //     message: `User with email: ${req.body.email} exist`
   //   });
   // }
-  res.status(200).json({ message: 'No co ty kurwa, chujnia z tą bazą nie działa' })
+  // res.status(200).json({ message: 'No co ty kurwa, chujnia z tą bazą nie działa' })
+
+  User.findOne({ email: req.body.email })
+    .then(user => {
+      res.status(409).json({ message: `User: ${user}` })
+    })
+    .catch(err => res.status(400).json({message: err.message}))
   // try {
   //   const user = await User.findOne({ email: req.body.email })
   //   if (!user) {
