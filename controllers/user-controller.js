@@ -1,13 +1,16 @@
 // const asyncHandler = require('express-async-handler')
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 // const bcrypt = require('bcrypt');
 
-const User = mongoose.model('users');
+// const User = mongoose.model('users');
 // const saltRounds = 12
 
+const MongoClient = require('mongodb').MongoClient
+
 exports.createUser = async function(req, res) {
-  const user = await User.findOne({ email: req.body.email })
-  res.status(200).json({ message: 'Crete user' })
+  // console.log(req.body)
+  // const user = await User.findOne({ email: req.body.email })
+  // res.status(200).json({ message: 'Crete user' })
  // User.findOne({ email: req.body.email })
  //  .then(user => {
  //    console.log(user);
@@ -18,6 +21,13 @@ exports.createUser = async function(req, res) {
  //    }
  //  })
  //  .catch(err => res.status(400).json({message: err.message}))
+  MongoClient.connect(process.env.DATABASE, { useUnifiedTopology: true })
+    .then(client => {
+    console.log('Connected to Database')
+    const db = client.db('test')
+    db.collection('users').find({ email: req.body.email }).toArray().then(col => res.status(200).json({ message: col }));
+  })
+  .catch(error => console.error(error))
 }
 
 

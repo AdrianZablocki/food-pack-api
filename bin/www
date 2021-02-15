@@ -9,25 +9,19 @@ require('dotenv').config({ path: '.env' });
 /**
  * Connect with data base on mongoDB.
  */
-const mongoose  = require('mongoose');
-require('../models/user-model');
+// const mongoose  = require('mongoose');
+// require('../models/user-model');
+//
+// mongoose.connect(process.env.DATABASE, {
+//   useUnifiedTopology: true,
+//   useNewUrlParser: true
+// }).then(() => console.log('Connected to Database'));
+//
+// mongoose.Promise = global.Promise;
+// mongoose.connection.on('error', (err) => {
+//   console.log('Database Connection Error -> ' + err.message);
+// });
 
-mongoose.connect(process.env.DATABASE, {
-  useUnifiedTopology: true,
-  useNewUrlParser: true
-}).then(() => console.log('Connected to Database'));
-
-mongoose.Promise = global.Promise;
-mongoose.connection.on('error', (err) => {
-  console.log('Database Connection Error -> ' + err.message);
-});
-
-// const MongoClient = require('mongodb').MongoClient
-// MongoClient.connect(process.env.DATABASE, { useUnifiedTopology: true })
-//   .then(client => {
-//     console.log('Connected to Database')
-//   })
-//   .catch(error => console.error(error))
 /**
  * Module dependencies.
  */
@@ -52,6 +46,21 @@ const server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
+// const MongoClient = require('mongodb').MongoClient
+// MongoClient.connect(process.env.DATABASE, { useUnifiedTopology: true })
+//   .then(() => console.log('Connected to Database'));
+// require('../models/user-model');
+// MongoClient.connect(process.env.DATABASE, { useUnifiedTopology: true })
+//   .then(client => {
+//     console.log('Connected to Database')
+//     const db = client.db('test')
+//     const collection = db.collection('users').find().toArray().then(res => console.log(res));
+//     console.log(collection);
+//     server.listen(port);
+//     server.on('error', onError);
+//     server.on('listening', onListening);
+//   })
+//   .catch(error => console.error(error))
 
 server.listen(port);
 server.on('error', onError);
