@@ -9,7 +9,6 @@ require('dotenv').config({ path: '.env' });
 /**
  * Connect with data base on mongoDB.
  */
-
 const mongoose  = require('mongoose');
 require('../models/user-model');
 
@@ -23,6 +22,12 @@ mongoose.connection.on('error', (err) => {
   console.log('Database Connection Error -> ' + err.message);
 });
 
+// const MongoClient = require('mongodb').MongoClient
+// MongoClient.connect(process.env.DATABASE, { useUnifiedTopology: true })
+//   .then(client => {
+//     console.log('Connected to Database')
+//   })
+//   .catch(error => console.error(error))
 /**
  * Module dependencies.
  */
