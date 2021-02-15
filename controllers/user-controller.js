@@ -5,7 +5,8 @@ const User = mongoose.model('user');
 // const saltRounds = 12
 
 exports.createUser = function(req, res) {
-  res.json({ message: 'Huj w to wbijam' })
+  const user = User.findOne({ email: req.body.email });
+  res.json({ message: 'Huj w to wbijam' });
   // User.findOne({ email: req.body.email }).then(function(user) {
   //   if (!user) {
   //     res.status(200).json({ message: 'User created' })
