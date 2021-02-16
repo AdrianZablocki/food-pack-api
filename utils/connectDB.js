@@ -7,8 +7,8 @@ exports.connectDB = function() {
     console.log('Connected to Database');
     MongoClient.connect(process.env.MONGO_URL, { useUnifiedTopology: true }, (err, _db) => {
         if (err) return reject(err);
-        db = _db;
-        resolve(_db);
+        db = _db.db('test');
+        resolve(_db.db('test'));
     });
   });
 }
