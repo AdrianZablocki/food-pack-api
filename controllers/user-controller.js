@@ -8,7 +8,7 @@
 const MongoClient = require('mongodb').MongoClient
 
 exports.createUser = function(req, res) {
-  MongoClient.connect(process.env.DATABASE, { useUnifiedTopology: true })
+  MongoClient.connect(process.env.MONGO_URL, { useUnifiedTopology: true })
     .then(client => {
       console.log('Connected to Database')
       const db = client.db('test')
