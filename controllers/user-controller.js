@@ -3,8 +3,8 @@ const connection = require('../utils/connectDB');
 
 exports.createUser = function(req, res) {
   connection.connectDB().then(db => {
-    db.collection('users').findOne({ email: req.body.email }).then(col => {
-      if (!col) {
+    db.collection('users').findOne({ email: req.body.email }).then(user => {
+      if (!user) {
         bcrypt.genSalt(10, function(err, salt) {
           bcrypt.hash(req.body.password, salt, function(err, hash) {
             db.collection('users').insertOne({
