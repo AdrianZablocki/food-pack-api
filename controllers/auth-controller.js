@@ -13,6 +13,11 @@ exports.authUser = function(req, res) {
           const accessToken = jwt.sign({ id: user.id, email: user.email }, process.env.TOKEN_SECRET, { expiresIn: 86400 });
           // TODO przy tworzeniu zapisać w bazie danych i przy akcji refresh token sprawdzić czy podany istneje
           const refreshToken = jwt.sign({ id: user.id, email: user.email }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: 525600 });
+          // TODO: CSRF + cookie http only
+          res.cookie('JWT', accessToken, {
+            maxAge: 86400000,
+            httpOnly: true
+          });
           res.json({ accessToken, refreshToken });
         } else {
           res.json({ message: 'Wrong password' });
