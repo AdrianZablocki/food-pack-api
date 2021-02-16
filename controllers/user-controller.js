@@ -15,7 +15,13 @@ exports.createUser = function(req, res) {
       db.collection('users').findOne({ email: req.body.email }).then(col => {
         // res.status(200).json({ message: col, kurwa: "I huj ci do tego" });
         if (!col) {
-          res.status(200).json({ message: 'User created'})
+          bcrypt.genSalt(10, function(err, salt) {
+            bcrypt.hash(req.body.password, salt, function(err, hash) {
+                // Store hash in your password DB.
+                res.status(200).json({ message: 'User created', hash })
+            });
+          });
+          // res.status(200).json({ message: 'User created'})
           // bcrypt.hash(req.body.password, saltRounds, (err,   hash) => {
           //   res.status(200).json({ message: 'User created', hash })
           //   // new User({
