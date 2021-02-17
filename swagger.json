@@ -1,0 +1,186 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Food Pack API",
+    "description": "API for Food Pack Application",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "User",
+      "description": "API for user in the system"
+    },
+    {
+      "name": "Auth",
+      "description": "API for authorization"
+    }
+  ],
+  "schemes": ["https", "http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/user": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "summary": "Create user",
+        "responses": {
+          "200": {
+            "description": "User created",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "409": {
+            "description": "User exist",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to authorized",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "summary": "Get access token - JWT",
+        "responses": {
+          "200": {
+            "description": "Get access and refresh token with success",
+            "schema": {
+              "$ref": "#/definitions/UserAuthorization"
+            }
+          },
+          "404": {
+            "description": "User not found, wrong email or password",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/auth/refresh": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "parameters": [
+          {
+            "name": "refresh token data",
+            "in": "body",
+            "description": "Use refresh token",
+            "schema": {
+              "$ref": "#/definitions/RefresTokenData"
+            }
+          }
+        ],
+        "summary": "Use refresh token",
+        "responses": {
+          "200": {
+            "description": "Get access token with success",
+            "schema": {
+              "$ref": "#/definitions/AccessToken"
+            }
+          },
+          "403": {
+            "description": "Forbidden - bad token",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "404": {
+            "description": "User not found, wrong email",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccessToken": {
+      "properties": {
+        "AccessToken": {
+          "type": "string"
+        }       
+      }
+    },
+    "Message": {
+      "properties": {
+        "message": {
+          "type": "string"
+        }       
+      }
+    },
+    "User": {
+      "required": [
+        "email",
+        "password"
+      ],
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string" 
+        }
+       
+      }
+    },
+    "UserAuthorization": {
+      "properties": {
+        "accessToken": {
+          "type": "string"
+        },
+        "refreshToken": {
+          "type": "string"
+        }       
+      }
+    },
+    "Users": {
+      "type": "array",
+      "$ref": "#/definitions/User"
+    },
+    "RefresTokenData": {
+      "properties": {
+        "token": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }       
+      }
+    }
+  }
+}
