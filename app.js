@@ -12,7 +12,7 @@ const authRouter = require('./routes/auth-routes');
 const userRouter = require('./routes/user-routes');
 
 require('dotenv').config({ path: '.env' });
-swaggerDocument.host = process.env.HOST;
+swaggerDocument.host = process.env.SWAGGER_HOST;
 
 const app = express();
 
