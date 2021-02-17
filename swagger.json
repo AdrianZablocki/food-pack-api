@@ -15,6 +15,10 @@
     {
       "name": "Users",
       "description": "API for users in the system"
+    },
+    {
+      "name": "GitKurwa",
+      "description": "API for gitKurwa"
     }
   ],
   "schemes": [
