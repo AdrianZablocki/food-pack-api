@@ -18,22 +18,21 @@ exports.authUser = function(req, res) {
             maxAge: 86400000,
             httpOnly: true
           });
-          res.json({ accessToken, refreshToken });
+          res.status(200).json({ accessToken, refreshToken });
         } else {
-          res.json({ message: 'Wrong password' });
+          res.status(404).json({ message: 'Wrong email or password' });
         }
       } else {
-        res.json({ message: 'Wrong email' });
+        res.status(404).json({ message: 'Wrong email or password' });
       }
-    })
-  });
+    }).catch(err => res.status(500).json({ message: 'DB connection error', err }));
+  }).catch(err => res.status(500).json({ message: 'DB connection error', err }));
 
 }
 
 exports.refreshToken = function(req, res) {
   const refreshToken = req.body.token;
   if (!refreshToken) return res.status(401) // Unauthorized
-  
   // TODO: check if refresh token exist in DB
   connection.connectDB().then(db => {
     db.collection('users').findOne({ email: req.body.email }).then(user => {
@@ -49,25 +48,3 @@ exports.refreshToken = function(req, res) {
   });
 
 }
-
-
-// exports.refreshToken = async (req, res) => {
-//   const refreshToken = req.body.token;
-//   const user = await User.findOne({ _id: req.body.userId });
-
-//   if (!refreshToken) {
-//     return res.sendStatus(401) // Unauthorized
-//   }
-
-//   // TODO: check if refresh token exist in DB
-
-//   try {
-//     await jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
-//   } catch {
-//     return res.sendStatus(403) // bad token forbidden
-//   }
-
-//   const accessToken = jwt.sign({ id: user.id, email: user.email }, process.env.TOKEN_SECRET, { expiresIn: 86400 })
-
-//   res.send({ accessToken })
-// }

@@ -17,8 +17,7 @@ exports.createUser = function(req, res) {
       } else {
         res.status(409).json({ message: `User with email: ${req.body.email} exist` });
       }
-    })
-    .catch(error => console.error(error));
-  });
+    }).catch(err => res.status(500).json({ message: err }));
+  }).catch(err => res.status(500).json({ message: err }));
   
 }
