@@ -63,6 +63,16 @@
         "tags": [
           "Auth"
         ],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to authorized",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
         "summary": "Get access token - JWT",
         "responses": {
           "200": {
