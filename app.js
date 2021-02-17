@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
@@ -11,6 +12,7 @@ const authRouter = require('./routes/auth-routes');
 const userRouter = require('./routes/user-routes');
 
 require('dotenv').config({ path: '.env' });
+swaggerDocument.host = process.env.HOST;
 
 const app = express();
 
