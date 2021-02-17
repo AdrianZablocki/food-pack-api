@@ -9,25 +9,109 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "host": "localhost:8000",
+  "host": "localhost:3000",
   "basePath": "/",
   "tags": [
     {
-      "name": "Users",
-      "description": "API for users in the system"
+      "name": "User",
+      "description": "API for user in the system"
     },
     {
-      "name": "GitKurwa",
-      "description": "API for gitKurwa"
+      "name": "Auth",
+      "description": "API for authorization"
     }
   ],
-  "schemes": [
-    "http"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ]
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/user": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "summary": "Create user",
+        "responses": {
+          "200": {
+            "description": "User created",
+            "schema": {
+              "$ref": "#/definitions/UserCreated"
+            }
+          },
+          "409": {
+            "description": "User exist",
+            "schema": {
+              "$ref": "#/definitions/UserCreated"
+            }
+          }
+        }
+      }
+    },
+    
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Get access token - JWT",
+        "responses": {
+          "200": {
+            "description": "Get access and refresh token",
+            "schema": {
+              "$ref": "#/definitions/UserAuthorized"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "required": [
+        "email",
+        "password"
+      ],
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string" 
+        }
+       
+      }
+    },
+    "Users": {
+      "type": "array",
+      "$ref": "#/definitions/User"
+    },
+    "UserCreated": {
+      "properties": {
+        "message": {
+          "type": "string"
+        }       
+      }
+    },
+    "UserAuthorized": {
+      "properties": {
+        "accessToken": {
+          "type": "string"
+        },
+        "refreshToken": {
+          "type": "string"
+        }       
+      }
+    }
+   
+  }
 }
