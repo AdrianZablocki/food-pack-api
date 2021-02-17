@@ -40,7 +40,7 @@ exports.refreshToken = function(req, res) {
       if (user === null) return res.status(404).json({ message: 'Wrong email' }) // Not Found
 
       jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
-        if (err) return res.status(403).json({ message: ' Invalid signature' }) // Forbidden - bad token
+        if (err) return res.status(403).json({ message: ' Invalid signature' }) // Forbidden
         const accessToken = jwt.sign({ id: user.id, email: user.email }, process.env.TOKEN_SECRET, { expiresIn: 86400 })
         res.status(200).json({ accessToken });
       });
