@@ -1,11 +1,6 @@
-const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
+function User(email, password) {       // Accept name and age in the constructor
+  this.email = email || null;
+  this.password  = password  || null;
+}
 
-const UserSchema = new mongoose.Schema({
-  email: { type: String },
-  password: { type: String },
-  someData: { type: String },
-  anotherData: { type: String }
-});
-
-module.exports = mongoose.model('user', UserSchema);
+module.exports = User;  
