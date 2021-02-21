@@ -27,9 +27,7 @@
   "paths": {
     "/user": {
       "post": {
-        "tags": [
-          "User"
-        ],
+        "tags": ["User"],
         "parameters": [
           {
             "name": "user",
@@ -50,6 +48,115 @@
           },
           "409": {
             "description": "User exist",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/user/id/{userId}": {
+      "get": {
+        "tags": ["User"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "description": "String ID of the user to get"
+          }
+        ],
+        "summary": "Get user",
+        "responses": {
+          "200": {
+            "description": "User found",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/user/id/{userId}/update": {
+      "put": {
+        "tags": ["User"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "description": "String ID of the user to update"
+          },
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User data that we want to replace with user representation in DB",
+            "schema": {
+              "$ref": "#/definitions/UserUpdated"
+            }
+          }
+        ],
+        "summary": "Update user",
+        "responses": {
+          "200": {
+            "description": "User updated",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "500": {
+            "description": "General error",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/user/id/{userId}/delete": {
+      "delete": {
+        "tags": ["User"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "description": "String ID of the user to delete"
+          }
+        ],
+        "summary": "Delete user",
+        "responses": {
+          "200": {
+            "description": "User deleted",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "500": {
+            "description": "General error",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/user/userList": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get list of all users",
+        "responses": {
+          "200": {
+            "description": "Users list",
+            "schema": {
+              "$ref": "#/definitions/Users"
+            }
+          },
+          "500": {
+            "description": "General error",
             "schema": {
               "$ref": "#/definitions/Message"
             }
@@ -156,6 +263,13 @@
           "type": "string" 
         }
        
+      }
+    },
+    "UserUpdated": {
+      "properties": {
+        "email": {
+          "type": "string"
+        }      
       }
     },
     "UserAuthorization": {
