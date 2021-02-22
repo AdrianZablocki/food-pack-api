@@ -7,7 +7,6 @@ exports.authUser = function(req, res) {
     db.collection('users').findOne({ email: req.body.email }).then(user => {
       if (user) {
         const validPassword = bcrypt.compareSync(req.body.password, user.password);
-        console.log(validPassword);
 
         if (validPassword) {
           const accessToken = jwt.sign({ id: user.id, email: user.email }, process.env.TOKEN_SECRET, { expiresIn: 86400 });
