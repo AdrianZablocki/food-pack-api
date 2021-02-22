@@ -35,7 +35,7 @@ exports.getUser = function(req, res) {
 exports.updateUser = function(req, res) {
   connection.connectDB().then(db => {
     db.collection('users').findOneAndUpdate(
-      { _id: new ObjectId(req.params.id) },
+      { _id: new ObjectId(req.params.id)},
       { $set: req.body },
       { useFindAndModify: false },
       (err) => {

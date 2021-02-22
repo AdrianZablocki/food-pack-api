@@ -11,4 +11,5 @@ exports.connectDB = function() {
         resolve(_db.db('test'));
     });
   });
+  
 }
