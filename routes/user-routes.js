@@ -13,4 +13,6 @@ router.delete('/id/:id/delete', usersController.deleteUser);
 
 router.get('/userList', usersController.getAllUsers);
 
+// router.get('/email', usersController.email);
+
 module.exports = router;

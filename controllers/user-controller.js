@@ -1,8 +1,9 @@
 const bcrypt = require('bcryptjs');
 ObjectId = require('mongodb').ObjectId; 
 
-const User = require('../models/user-model');
 const connection = require('../utils/connectDB');
+const { emailTransporter } = require('../utils/mail');
+const User = require('../models/user-model');
 
 exports.createUser = function(req, res) {
   connection.connectDB().then(db => {
@@ -60,11 +61,22 @@ exports.deleteUser = function(req, res) {
 }
 
 exports.getAllUsers = function(req, res) {
+  const mailData = {
+    from: 'mastahwasta@gmail.com',  // sender address
+    to: 'adrian.zablocki@yahoo.com',   // list of receivers
+    subject: 'Sending Email using Node.js',
+    text: 'That was easy!',
+    html: '<b>Hey there! </b><br> This is our first message sent with Nodemailer<br/>',
+  };
+
   connection.connectDB().then(db => {
     db.collection('users').find({}).toArray((err, result) => {
-      err
-        ? res.status(500).json({ message: 'Something went wrong, try again later' })
-        : res.status(200).send(result);
+      if (err){
+        res.status(500).json({ message: 'Something went wrong, try again later' })
+      } else {
+        emailTransporter(mailData)
+        res.status(200).send(result);
+      }
     });
   }).catch(err => res.status(500).json({ message: err }));
 
