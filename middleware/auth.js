@@ -9,7 +9,6 @@ function auth(req, res, next) {
 
   jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
     if (err) return res.sendStatus(403); // forbidden
-    console.log(user, req.user)
     req.user = user;
     next();
   });
