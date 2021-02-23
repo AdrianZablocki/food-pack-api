@@ -55,7 +55,7 @@
         }
       }
     },
-    "/user/id/{userId}": {
+    "/user/{userId}": {
       "get": {
         "tags": ["User"],
         "parameters": [
@@ -86,9 +86,7 @@
             }
           }
         }
-      }
-    },
-    "/user/id/{userId}/update": {
+      },
       "put": {
         "tags": ["User"],
         "parameters": [
@@ -127,9 +125,7 @@
             }
           }
         }
-      }
-    },
-    "/user/id/{userId}/delete": {
+      },
       "delete": {
         "tags": ["User"],
         "parameters": [
